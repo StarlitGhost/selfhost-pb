@@ -10,4 +10,4 @@ You'll want to symlink that project's .env file into this project's directory an
 Once that's done you can just spin it up with `docker-compose up -d`. Boom, service working.
 
 Out of the box, pb only accepts pastes and URLs via API.  
-Optionally you can set up a friendly web form for this, the process for that is described in the README for [pbwww](https://github.com/DesertBot/pbwww).
+Optionally you can set up a friendly web form for this, the process for that is described in the README for [pbwww](https://github.com/DesertBot/pbwww). *not yet. but soon!*
