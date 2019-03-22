@@ -1,0 +1,39 @@
+version: '3.5'
+
+services:
+  pb:
+    image: ptpb/pb
+    container_name: pb
+    ports:
+      - 10002:8080
+    depends_on:
+      - mongodb 
+    networks:
+      - web
+      - default
+    environment:
+      - 'LISTEN_ADDRESS=::'
+    labels:
+      - "traefik.domain=${DOMAIN_SHORTENER}"
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.backend=pb"
+      - "traefik.frontend.rule=Host:${DOMAIN_SHORTENER}"
+      - "traefik.port=8080"
+      - "traefik.protocol=http"
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo 
+    restart: on-failure
+    volumes:
+      - ${PERSISTENT_DIR}/mongodb:/data/db
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+networks:
+  web:
+    external: true
+
+# vim: tabstop=2 shiftwidth=2 expandtab
